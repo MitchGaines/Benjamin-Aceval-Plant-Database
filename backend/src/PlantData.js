@@ -9,12 +9,9 @@ const PlantSchema = new Schema(
         family_name: String,
         description: String,
         flowering_season: String,
-        facts: String,
         gps: String,
-        sources: String,
-        image_name: String
-    },
-    { timestamp: true }
+        image_name: []
+    }
 );
 
 module.exports = mongoose.model("plants", PlantSchema);
