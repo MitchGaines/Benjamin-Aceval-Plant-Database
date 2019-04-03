@@ -42,21 +42,19 @@ router.get("/getPlants", (req, res) => {
 
 //take json of new plant and put into database
 /* TEMPLATE CURL POST:
-    curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "facts": "", "gps": "-24.99978°N -57.54022°E", "sources": "http://arbolesdelchaco.blogspot.com/2012/07/mimosa-coxoraic.html", "image_name": "IMG_8714.jpg"}' http://localhost:3000/api/newPlant
+    curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "gps": "-24.99978N -57.54022E", "image_name": ["IMG_8714.jpg"]}' http://localhost:3000/api/newPlant
 */
 router.post("/newPlant", (req, res) => {
     let data = new Data();
     const { scientific_name, common_name, family_name, description,
-    flowering_season, facts, gps, sources, image_name } = req.body;
+    flowering_season, gps, image_name } = req.body;
 
     data.scientific_name = scientific_name;
     data.common_name = common_name;
     data.family_name = family_name;
     data.description = description;
     data.flowering_season = flowering_season;
-    data.facts = facts;
     data.gps = gps;
-    data.sources = sources;
     data.image_name = image_name;
 
     data.save(err => {
