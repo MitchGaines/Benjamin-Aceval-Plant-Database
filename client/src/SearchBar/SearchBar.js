@@ -4,8 +4,9 @@ import Radium from 'radium';
 const searchbar = (props) => {
 
     return(
-        <div className="form-group pull-right">
-            <input type="text" className="search form-control col-md-8 offset-2" placeholder="Search for plant" />
+        <div className="form-group">
+            <input type="text" className="search form-control col-sm-8 offset-2 d-none d-sm-block" placeholder="Search for plant" />
+            <input type="text" className="search form-control col-xs-12 d-block d-sm-none" placeholder="Search for plant" />
         </div>
     )
 }

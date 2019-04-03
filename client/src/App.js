@@ -42,12 +42,21 @@ class App extends Component {
 
 
     render() {
+
         let plants = (
             <div>
                 {this.state.plants.map((plant, index) => {
+                    const image_name = '/plant_images/' + plant.image_name;
                     return <Plant
                         index={index}
-                        name={plant.scientific_name} />
+                        scientific_name={plant.scientific_name}
+                        common_name={plant.common_name}
+                        family_name={plant.family_name}
+                        flowering_season={plant.flowering_season}
+                        gps={plant.gps}
+                        description={plant.description}
+                        facts={plant.facts}
+                        img={image_name} />
                 })}
             </div>
         );
