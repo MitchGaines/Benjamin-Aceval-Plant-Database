@@ -42,7 +42,7 @@ router.get("/getPlants", (req, res) => {
 
 //take json of new plant and put into database
 /* TEMPLATE CURL POST:
-    curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "facts": "", "GPS": "-24.99978°N -57.54022°E", "sources": "http://arbolesdelchaco.blogspot.com/2012/07/mimosa-coxoraic.html", "image_name": "IMG_8714.jpg"}' http://localhost:3000/api/newPlant
+    curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "facts": "", "gps": "-24.99978°N -57.54022°E", "sources": "http://arbolesdelchaco.blogspot.com/2012/07/mimosa-coxoraic.html", "image_name": "IMG_8714.jpg"}' http://localhost:3000/api/newPlant
 */
 router.post("/newPlant", (req, res) => {
     let data = new Data();
