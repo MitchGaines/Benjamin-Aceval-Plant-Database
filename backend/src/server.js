@@ -42,18 +42,17 @@ router.get("/getPlants", (req, res) => {
 
 router.get("/plantFilter/:filter", (req, res) => {
     const filter = req.params.filter;
-    let regex = new RegExp(filter, "g").ignoreCase;
 
     PlantData.find(
-        {
-            'scientific_name': regex,
-            'common_name': regex,
-            'family_name': regex,
-            'flowering_season': regex
-        }, (err, data) => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data});
-    });
+        {$or:[
+                {'scientific_name': new RegExp(filter, "gi")},
+                {'common_name': new RegExp(filter, "gi")},
+                {'family_name': new RegExp(filter, "gi")},
+                {'flowering_season': new RegExp(filter, "gi")}
+        ]}, (err, data) => {
+            if (err) return res.json({ success: false, error: err });
+            return res.json({ success: true, data: data});
+        });
 });
 
 //take json of new plant and put into database

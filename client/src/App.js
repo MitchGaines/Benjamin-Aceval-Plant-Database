@@ -36,7 +36,7 @@ class App extends Component {
     }
 
     getPlantsFromDb = () => {
-        if(!this.state.searchFilter) {
+        if(!this.state.searchInProgress) {
             fetch("http://localhost:3001/api/getPlants")
                 .then(data => data.json())
                 .then(res => this.setState({plants: res.data}));
@@ -49,7 +49,7 @@ class App extends Component {
                 .then(data => data.json())
                 .then(res => this.setState({searchInProgress: true, plants: res.data}));
         } else {
-            this.setState({searchInProgress: false})
+            this.setState({searchInProgress: false});
         }
     }
 
