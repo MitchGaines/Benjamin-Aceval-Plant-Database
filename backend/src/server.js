@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import Data from './PlantData';
+import PlantData from './PlantData';
 import settings from '../settings'
 
 const express = require("express");
@@ -29,14 +29,30 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // (optional) only made for logging and
 // bodyParser, parses the request body to be a readable json format
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ defaultCharset: 'utf-8', extended: true }));
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
 router.get("/getPlants", (req, res) => {
-    Data.find((err, data) => {
+    PlantData.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true, data: data });
+        return res.json({ success: true, data: data});
+    });
+});
+
+router.get("/plantFilter/:filter", (req, res) => {
+    const filter = req.params.filter;
+    let regex = new RegExp(filter, "g").ignoreCase;
+
+    PlantData.find(
+        {
+            'scientific_name': regex,
+            'common_name': regex,
+            'family_name': regex,
+            'flowering_season': regex
+        }, (err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, data: data});
     });
 });
 
@@ -45,7 +61,7 @@ router.get("/getPlants", (req, res) => {
     curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "gps": "-24.99978N -57.54022E", "image_name": ["IMG_8714.jpg"]}' http://localhost:3000/api/newPlant
 */
 router.post("/newPlant", (req, res) => {
-    let data = new Data();
+    let data = new PlantData();
     const { scientific_name, common_name, family_name, description,
     flowering_season, gps, image_name } = req.body;
 

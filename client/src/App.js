@@ -11,7 +11,8 @@ class App extends Component {
         intervalIsSet: false,
         idToDelete: null,
         idToUpdate: null,
-        objectToUpdate: null
+        objectToUpdate: null,
+        searchInProgress: false,
     };
 
     // when component mounts, first thing it does is fetch all existing data in our db
@@ -35,17 +36,27 @@ class App extends Component {
     }
 
     getPlantsFromDb = () => {
-        fetch("http://localhost:3001/api/getPlants")
-            .then(data => data.json())
-            .then(res => this.setState({ plants: res.data }));
+        if(!this.state.searchFilter) {
+            fetch("http://localhost:3001/api/getPlants")
+                .then(data => data.json())
+                .then(res => this.setState({plants: res.data}));
+        }
     };
 
+    filterPlants = (event) => {
+        if(event.target.value) {
+            fetch("http://localhost:3001/api/plantFilter/" + event.target.value)
+                .then(data => data.json())
+                .then(res => this.setState({searchInProgress: true, plants: res.data}));
+        } else {
+            this.setState({searchInProgress: false})
+        }
+    }
 
     render() {
-
         let plants = (
             <div>
-                {this.state.plants.map((plant, index) => {
+                {this.state.plants.map((plant) => {
 
                     const image_paths = plant.image_name.map((image) => {
                        return '/plant_images/' + image;
@@ -68,7 +79,7 @@ class App extends Component {
             <StyleRoot>
                 <div className="App">
                     <h1>Benjamín Aceval Plant Database</h1>
-                    <Searchbar />
+                    <Searchbar changed={(event) => this.filterPlants(event)} />
                     {plants}
                 </div>
             </StyleRoot>

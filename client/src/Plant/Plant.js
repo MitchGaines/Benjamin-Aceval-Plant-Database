@@ -6,10 +6,9 @@ import PlantCarousel from './PlantCarousel/PlantCarousel';
 
 const plant = (props) => {
     return(
-        <div className="Plant col-md-4 col-sm-6 col-xs-12">
+        <div className="Plant col-md-4 col-sm-6 col-xs-12 align-top">
             <div className="card bg-light">
                 <PlantCarousel imgs={props.images} />
-
                 <div className="card-body">
                     <h5 className="card-title">{props.scientific_name}</h5>
                     <table className="table table-attributes">
