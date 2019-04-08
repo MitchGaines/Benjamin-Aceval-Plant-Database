@@ -8,7 +8,7 @@ const plantcarousel = (props) => {
             <img className="card-img-top d-block w-100" src={image} />
         </Carousel.Item>});
 
-    return (<Carousel>
+    return (<Carousel interval={null}>
         {plant_images}
     </Carousel>);
 }
