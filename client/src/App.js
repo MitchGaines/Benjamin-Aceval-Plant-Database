@@ -4,7 +4,6 @@ import Radium, {StyleRoot} from 'radium';
 import Searchbar from './SearchBar/SearchBar';
 import Plant from './Plant/Plant'
 
-
 class App extends Component {
     state = {
         plants: [],
@@ -37,7 +36,7 @@ class App extends Component {
 
     getPlantsFromDb = () => {
         if(!this.state.searchInProgress) {
-            fetch("http://localhost:3001/api/getPlants")
+            fetch("http://15.0.3.6:3001/api/getPlants")
                 .then(data => data.json())
                 .then(res => this.setState({plants: res.data}));
         }
@@ -45,7 +44,7 @@ class App extends Component {
 
     filterPlants = (event) => {
         if(event.target.value) {
-            fetch("http://localhost:3001/api/plantFilter/" + event.target.value)
+            fetch("http://15.0.3.6:3001/api/plantFilter/" + event.target.value)
                 .then(data => data.json())
                 .then(res => this.setState({searchInProgress: true, plants: res.data}));
         } else {
@@ -78,9 +77,11 @@ class App extends Component {
         return (
             <StyleRoot>
                 <div className="App">
-                    <h1>Benjamín Aceval Plant Database</h1>
+                    <h1>Las Plantas de Benjamín Aceval</h1>
                     <Searchbar changed={(event) => this.filterPlants(event)} />
-                    {plants}
+                    <div className="container-fluid">
+                        {plants}
+                    </div>
                 </div>
             </StyleRoot>
         );

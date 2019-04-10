@@ -1,7 +1,6 @@
 import React from 'react';
 import './Plant.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserEdit } from '@fortawesome/free-solid-svg-icons';
 import PlantCarousel from './PlantCarousel/PlantCarousel';
 
 const plant = (props) => {
@@ -10,32 +9,31 @@ const plant = (props) => {
             <div className="card bg-light">
                 <PlantCarousel imgs={props.images} />
                 <div className="card-body">
-                    <h5 className="card-title">{props.scientific_name}</h5>
+                    <h5 className="card-title"><i>{props.scientific_name}</i></h5>
                     <table className="table table-attributes">
                         <tbody>
                             <tr>
-                                <td><b>Common Name: </b></td>
+                                <td><b>Nombres Vernáculos: </b></td>
                                 <td>{props.common_name}</td>
                             </tr>
                             <tr>
-                                <td><b>Family Name: </b></td>
+                                <td><b>Familia: </b></td>
                                 <td>{props.family_name}</td>
                             </tr>
                             <tr>
-                                <td><b>Flowering Season: </b></td>
+                                <td><b>Temporada de Floración: </b></td>
                                 <td>{props.flowering_season}</td>
                             </tr>
                             <tr>
-                                <td><b>Location Found: </b></td>
+                                <td><b>Ubicación Encontrada: </b></td>
                                 <td>{props.gps}</td>
                             </tr>
                             <tr>
-                                <td><b>Description: </b></td>
+                                <td><b>Descripción: </b></td>
                                 <td>{props.description}</td>
                             </tr>
                         </tbody>
                     </table>
-                    <a href="#" className="btn btn-primary"><FontAwesomeIcon icon={faUserEdit} /> Edit</a>
                 </div>
             </div>
         </div>
