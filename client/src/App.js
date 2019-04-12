@@ -38,7 +38,9 @@ class App extends Component {
         if(!this.state.searchInProgress) {
             fetch("http://15.0.3.6:3001/api/getPlants")
                 .then(data => data.json())
-                .then(res => this.setState({plants: res.data}));
+                .then((res) => {
+                    if(res.data.length !== 0) this.setState({plants: res.data})
+                });
         }
     };
 
