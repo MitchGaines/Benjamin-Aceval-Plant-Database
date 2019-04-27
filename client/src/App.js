@@ -36,17 +36,17 @@ class App extends Component {
 
     getPlantsFromDb = () => {
         if(!this.state.searchInProgress) {
-            fetch("http://15.0.3.6:3001/api/getPlants")
+            fetch("http://localhost:3001/api/getPlants")
                 .then(data => data.json())
                 .then((res) => {
-                    if(res.data.length !== 0) this.setState({plants: res.data})
+                    if(res.data != null && res.data.length !== 0) this.setState({plants: res.data})
                 });
         }
     };
 
     filterPlants = (event) => {
         if(event.target.value) {
-            fetch("http://15.0.3.6:3001/api/plantFilter/" + event.target.value)
+            fetch("http://localhost:3001/api/plantFilter/" + event.target.value)
                 .then(data => data.json())
                 .then(res => this.setState({searchInProgress: true, plants: res.data}));
         } else {
