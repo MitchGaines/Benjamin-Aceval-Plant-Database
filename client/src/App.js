@@ -36,7 +36,7 @@ class App extends Component {
 
     getPlantsFromDb = () => {
         if(!this.state.searchInProgress) {
-            fetch("http://0.0.0.0:3001/api/getPlants")
+            fetch("http://pdba.wpi.edu:3001/api/getPlants")
                 .then(data => data.json())
                 .then((res) => {
                     if(res.data != null && res.data.length !== 0) this.setState({plants: res.data})
@@ -46,7 +46,7 @@ class App extends Component {
 
     filterPlants = (event) => {
         if(event.target.value) {
-            fetch("http://0.0.0.0:3001/api/plantFilter/" + event.target.value)
+            fetch("http://pdba.wpi.edu:3001/api/plantFilter/" + event.target.value)
                 .then(data => data.json())
                 .then(res => this.setState({searchInProgress: true, plants: res.data}));
         } else {
