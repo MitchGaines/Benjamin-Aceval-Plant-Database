@@ -30,6 +30,7 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
+backend/dist
 build/Release
 
 # Dependency directories
@@ -66,3 +67,8 @@ backend/settings.js
 
 #pictures
 plant_images/
+
+#misc
+client/.env.development
+process.json
+
