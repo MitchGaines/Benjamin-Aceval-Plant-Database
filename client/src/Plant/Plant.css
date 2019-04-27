@@ -1,5 +1,6 @@
 .Plant{
-    display: inline-block;
+    display: inline-grid;
+    margin-bottom: 10px;
 }
 
 .table-attributes {
