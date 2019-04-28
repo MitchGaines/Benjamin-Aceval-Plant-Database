@@ -1,0 +1,10 @@
+.Plant{
+    display: inline-grid;
+    margin-bottom: 10px;
+}
+
+.table-attributes {
+    text-align: left;
+    margin: 0;
+}
+
