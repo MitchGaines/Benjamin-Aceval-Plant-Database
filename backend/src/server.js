@@ -37,7 +37,7 @@ router.get("/getPlants", (req, res) => {
     PlantData.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, data: data});
-    });
+    }).sort({"scientific_name": 1});
 });
 
 router.get("/plantFilter/:filter", (req, res) => {
@@ -49,7 +49,6 @@ router.get("/plantFilter/:filter", (req, res) => {
                 {'common_name': new RegExp(filter, "gi")},
                 {'family_name': new RegExp(filter, "gi")},
                 {'flowering_season': new RegExp(filter, "gi")},
-                {'description': new RegExp(filter, "gi")},
                 {'species_type': new RegExp(filter, "gi")}
         ]}, (err, data) => {
             if (err) return res.json({ success: false, error: err });
