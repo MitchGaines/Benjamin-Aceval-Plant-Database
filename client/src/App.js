@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Radium, {StyleRoot} from 'radium';
 import Searchbar from './SearchBar/SearchBar';
-import Plant from './Plant/Plant'
+import Plant from './Species/Species'
 
 class App extends Component {
     state = {
@@ -36,7 +36,7 @@ class App extends Component {
 
     getPlantsFromDb = () => {
         if(!this.state.searchInProgress) {
-            fetch("http://pdba.wpi.edu:3001/api/getPlants")
+            fetch("http://localhost:3001/api/getPlants")
                 .then(data => data.json())
                 .then((res) => {
                     if(res.data != null && res.data.length !== 0) this.setState({plants: res.data})
@@ -46,7 +46,7 @@ class App extends Component {
 
     filterPlants = (event) => {
         if(event.target.value) {
-            fetch("http://pdba.wpi.edu:3001/api/plantFilter/" + event.target.value)
+            fetch("http://localhost:3001/api/plantFilter/" + event.target.value)
                 .then(data => data.json())
                 .then(res => this.setState({searchInProgress: true, plants: res.data}));
         } else {
@@ -55,6 +55,7 @@ class App extends Component {
     }
 
     render() {
+
         let plants = (
             <div>
                 {this.state.plants.map((plant) => {
@@ -68,6 +69,7 @@ class App extends Component {
                         scientific_name={plant.scientific_name}
                         common_name={plant.common_name}
                         family_name={plant.family_name}
+                        bird_call={plant.bird_call}
                         flowering_season={plant.flowering_season}
                         gps={plant.gps}
                         description={plant.description}
@@ -79,7 +81,7 @@ class App extends Component {
         return (
             <StyleRoot>
                 <div className="App">
-                    <h1>Las Plantas de Benjamín Aceval</h1>
+                    <h1>Las Plantas y Aves de Benjamín Aceval</h1>
                     <Searchbar changed={(event) => this.filterPlants(event)} />
                     <div className="container-fluid">
                         {plants}
