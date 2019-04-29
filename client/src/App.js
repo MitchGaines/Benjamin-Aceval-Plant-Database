@@ -55,6 +55,7 @@ class App extends Component {
     }
 
     render() {
+
         let plants = (
             <div>
                 {this.state.plants.map((plant) => {
@@ -68,6 +69,7 @@ class App extends Component {
                         scientific_name={plant.scientific_name}
                         common_name={plant.common_name}
                         family_name={plant.family_name}
+                        bird_call={plant.bird_call}
                         flowering_season={plant.flowering_season}
                         gps={plant.gps}
                         description={plant.description}
@@ -79,7 +81,7 @@ class App extends Component {
         return (
             <StyleRoot>
                 <div className="App">
-                    <h1>Las Plantas de Benjamín Aceval</h1>
+                    <h1>Las Plantas y Aves de Benjamín Aceval</h1>
                     <Searchbar changed={(event) => this.filterPlants(event)} />
                     <div className="container-fluid">
                         {plants}

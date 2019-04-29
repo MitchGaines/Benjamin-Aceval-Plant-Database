@@ -48,7 +48,9 @@ router.get("/plantFilter/:filter", (req, res) => {
                 {'scientific_name': new RegExp(filter, "gi")},
                 {'common_name': new RegExp(filter, "gi")},
                 {'family_name': new RegExp(filter, "gi")},
-                {'flowering_season': new RegExp(filter, "gi")}
+                {'flowering_season': new RegExp(filter, "gi")},
+                {'description': new RegExp(filter, "gi")},
+                {'species_type': new RegExp(filter, "gi")}
         ]}, (err, data) => {
             if (err) return res.json({ success: false, error: err });
             return res.json({ success: true, data: data});
@@ -80,13 +82,14 @@ router.post("/newPlant", (req, res) => {
 
 router.post("/newSpecies", (req, res) => {
     let data = new PlantData();
-    const { scientific_name, common_name, family_name, species_type,
+    const { scientific_name, common_name, family_name, species_type, bird_call,
         description, flowering_season, gps, image_name } = req.body;
 
     data.scientific_name = scientific_name;
     data.common_name = common_name;
     data.family_name = family_name;
     data.species_type = species_type;
+    data.bird_call = bird_call;
     data.description = description;
     data.flowering_season = flowering_season;
     data.gps = gps;

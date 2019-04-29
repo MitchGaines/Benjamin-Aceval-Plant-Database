@@ -7,6 +7,7 @@ const SpeciesSchema = new Schema(
             common_name: String,
             family_name: String,
             species_type: String,
+            bird_call: String,
             description: String,
             flowering_season: String,
             gps: String,
