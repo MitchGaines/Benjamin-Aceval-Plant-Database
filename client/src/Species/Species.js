@@ -28,7 +28,7 @@ const species = (props) => {
                                 <td>{props.family_name}</td>
                             </tr>
                             <tr style={bird_call_style}>
-                                <td><b>Canto de Pajarpo: </b></td>
+                                <td><b>Canto de Pajaro: </b></td>
                                 <td>{props.bird_call}</td>
                             </tr>
 
