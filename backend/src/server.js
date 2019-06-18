@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import PlantData from './SpeciesData';
+import SpeciesData from './SpeciesData';
 import settings from '../settings'
 
 const express = require("express");
@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 app.use(logger("dev"));
 
 router.get("/getPlants", (req, res) => {
-    PlantData.find((err, data) => {
+    SpeciesData.find((err, data) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true, data: data});
     }).sort({"scientific_name": 1});
@@ -43,7 +43,7 @@ router.get("/getPlants", (req, res) => {
 router.get("/plantFilter/:filter", (req, res) => {
     const filter = req.params.filter;
 
-    PlantData.find(
+    SpeciesData.find(
         {$or:[
                 {'scientific_name': new RegExp(filter, "gi")},
                 {'common_name': new RegExp(filter, "gi")},
@@ -56,12 +56,12 @@ router.get("/plantFilter/:filter", (req, res) => {
         });
 });
 
-//take json of new species and put into database
+//take json of new all_species and put into database
 /* TEMPLATE CURL POST:
     curl --header "Content-Type: application/json" --request POST --data '{ "scientific_name": "Aeschynomyne rudis", "common_name": "", "family_name": "Fabaceae", "description": "", "flowering_season": "", "gps": "-24.99978N -57.54022E", "image_name": ["IMG_8714.jpg"]}' http://localhost:3000/api/newPlant
 */
 router.post("/newPlant", (req, res) => {
-    let data = new PlantData();
+    let data = new SpeciesData();
     const { scientific_name, common_name, family_name, description,
     flowering_season, gps, image_name } = req.body;
 
@@ -80,7 +80,7 @@ router.post("/newPlant", (req, res) => {
 });
 
 router.post("/newSpecies", (req, res) => {
-    let data = new PlantData();
+    let data = new SpeciesData();
     const { scientific_name, common_name, family_name, species_type, bird_call,
         description, flowering_season, gps, image_name } = req.body;
 
