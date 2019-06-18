@@ -10,13 +10,14 @@ const species = (props) => {
     const bird_call_style = props.bird_call ? {} : {display: 'none'};
     const gps_style = props.gps ? {} : {display: 'none'};
     const description_style = props.description ? {} : {display: 'none'};
+    const author_style = props.author ? {} : {display: 'none'};
 
     return(
         <div className="Plant col-md-4 col-sm-6 col-xs-12 align-top">
             <div className="card bg-light">
                 <SpeciesCarousel imgs={props.images} />
                 <div className="card-body">
-                    <h5 className="card-title"><i>{props.scientific_name}</i></h5>
+                    <h5 className="card-title"><i>{props.scientific_name}</i> <span style={author_style}>{props.author}.</span></h5>
                     <table className="table table-attributes">
                         <tbody>
                             <tr style={common_name_style}>
